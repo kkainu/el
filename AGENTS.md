@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a static Finnish electricity price dashboard. `index.html` contains all markup, styles, and vanilla JavaScript. There is no package manager, build step, or automated test suite configured.
+This is a static Finnish electricity price dashboard. `index.html` contains all markup, styles, and vanilla JavaScript. There is no package manager or build step. Run the dependency-free price and date regression tests with `node --test`.
 
 ## Working on the app
 
@@ -15,7 +15,8 @@ This is a static Finnish electricity price dashboard. `index.html` contains all 
 
 - Use `Europe/Helsinki` explicitly for calendar dates and display times, regardless of the device timezone.
 - Keep intervals identified by timestamps so repeated local hours remain distinct during daylight-saving transitions. Support 23-, 24-, and 25-hour days.
-- The current API request uses `https://api.spot-hinta.fi/Today?region=FI&priceResolution=15`. `PriceWithTax` is converted from euros/kWh to cents/kWh by multiplying by 100; do not apply VAT again.
+- The current API request uses `https://api.spot-hinta.fi/TodayAndDayForward?region=FI&priceResolution=15` to fetch today and tomorrow together when available. `PriceWithTax` is converted from euros/kWh to cents/kWh by multiplying by 100; do not apply VAT again.
+- The day selector controls the chart, daily statistics, and cheapest hours. The current spot price card always describes today's active interval. Missing or incomplete tomorrow data must not hide valid prices for today.
 - The current price uses the active 15-minute interval. Hourly prices average four consecutive intervals; the 12 cheapest hours are ranked by price, with earlier timestamps breaking ties.
 - Validate a complete local day's data before ranking. Preserve negative-price support and avoid displaying stale cached prices as today's data.
 - Preserve graceful handling of network failures, unavailable local storage, and incomplete data. Respect the existing minimum 61-second gap between API requests.
