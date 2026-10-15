@@ -5,7 +5,7 @@ const {join} = require('node:path');
 const vm = require('node:vm');
 
 // Exercise the page's real date and price logic without a browser or live API.
-const html = readFileSync(join(__dirname, '../index.html'), 'utf8');
+const html = readFileSync(join(__dirname, '../docs/index.html'), 'utf8');
 const context = vm.createContext({Intl, Date});
 vm.runInContext(html.split('<script>')[1].split('// UI')[0], context);
 function evaluate(code, rows) {

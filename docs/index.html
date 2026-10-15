@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#163d31">
+<meta name="description" content="Today's Finnish electricity prices, including VAT. See the current price and the 12 cheapest hours in Helsinki time.">
+<title>Electricity today · Helsinki</title>
+<style>
+:root{color-scheme:light;--paper:#f6f7f2;--ink:#193e32;--muted:#66766f;--green:#278461;--soft:#e6f2e8;--line:#dfe5dd;--bar:#b7c3bc}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.5}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #b68a32;outline-offset:4px}main{max-width:980px;margin:auto;padding:32px 28px 24px}header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:34px}.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.5px;font-size:19px}.mark{display:grid;place-items:center;width:34px;height:34px;background:var(--ink);color:#d9f3ac;border-radius:10px}.location{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{width:6px;height:6px;border-radius:50%;background:var(--green)}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.8px;font-weight:700;color:var(--muted);margin:0 0 8px}h1{font-size:clamp(30px,5vw,43px);line-height:1.15;letter-spacing:-1.5px;margin:0 0 10px}h2{font-size:20px;letter-spacing:-.5px;margin:0}.intro{color:var(--muted);margin:0}.heading{margin-bottom:26px}.overview{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-bottom:24px}.overview>.current{background:var(--ink);color:white;border-radius:20px;padding:26px 28px;position:relative;overflow:hidden}.overview>.current:after{content:"";position:absolute;width:160px;height:160px;border:1px solid #ffffff0d;border-radius:50%;right:-65px;top:-45px;pointer-events:none}.current .eyebrow{color:#b3ccbe}.live{display:inline-flex;align-items:center;gap:7px;font-size:11px;background:#ffffff12;border:1px solid #ffffff1f;border-radius:20px;padding:4px 10px;float:right}.live .dot{background:#bce392}.price{font-size:58px;font-weight:650;line-height:1.2;letter-spacing:-2px;margin:16px 0 6px;font-variant-numeric:tabular-nums}.price small{font-size:15px;color:#bbd1c5;letter-spacing:0;font-weight:400}.period{color:#bbd1c5;font-size:13px;margin:0}.current-note{margin:17px 0 0;color:#d5e8dc;font-size:12px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat{padding:19px;background:#fff;border:1px solid var(--line);border-radius:16px}.stat:first-child{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px}.stat-label{color:var(--muted);font-size:12px}.stat-value{font-size:26px;font-weight:600;letter-spacing:-.8px;white-space:nowrap;font-variant-numeric:tabular-nums}.stat-value small{font-size:11px;letter-spacing:0;color:var(--muted);font-weight:400}.stat-time{font-size:11px;color:var(--muted)}.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;margin-bottom:18px}.chart-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}.refresh{border:1px solid var(--line);border-radius:9px;padding:8px 12px;background:#fff;font-size:12px;color:var(--ink);min-height:40px}.refresh:hover{background:var(--paper)}.refresh:disabled{opacity:.5;cursor:wait}.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin:16px 0 8px}.legend span{display:flex;align-items:center;gap:6px}.swatch{width:9px;height:9px;background:var(--bar);border-radius:2px}.swatch.cheap{background:var(--green)}.swatch.now{background:transparent;border:2px solid var(--ink)}.chart-unit{font-size:10px;color:var(--muted);margin:16px 0 0}.chart-shell{display:flex;margin-top:6px}.axis{width:34px;flex-shrink:0;position:relative;height:232px;color:var(--muted);font-size:10px;font-variant-numeric:tabular-nums}.axis span{position:absolute;right:8px;transform:translateY(-50%)}.scroll{flex:1;min-width:0;padding:0 2px 8px}.plot{height:262px;width:100%;position:relative}.grid{height:232px;position:absolute;inset:0 0 auto;pointer-events:none}.gridline{position:absolute;width:100%;border-top:1px dashed #e4e9e3}.gridline.zero{border-top:1px solid #a6b6ab}.bars{display:flex;position:absolute;inset:0;gap:5px}.bar{flex:1;min-width:0;height:262px;position:relative;border:0;padding:0;background:none;color:var(--muted);border-radius:6px}.bar-fill{position:absolute;left:1px;right:1px;background:var(--bar);border-radius:4px 4px 1px 1px;min-height:2px}.bar.cheap .bar-fill{background:var(--green)}.bar.negative .bar-fill{border-radius:1px 1px 4px 4px}.bar.current .bar-fill{box-shadow:inset 0 0 0 2px var(--ink)}.bar.selected{background:#193e3209}.bar:hover{background:#193e3206}.bar-label{position:absolute;top:242px;left:50%;transform:translateX(-50%);font-size:10px;white-space:nowrap;font-variant-numeric:tabular-nums}.bar.current .bar-label{font-weight:800;color:var(--ink)}.cheap-dot{position:absolute;top:258px;left:50%;width:3px;height:3px;background:var(--green);border-radius:50%}.chart-hint{font-size:11px;color:var(--muted);margin:8px 0 15px}.selection{margin-top:12px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:49px;font-size:13px}.selection strong{font-variant-numeric:tabular-nums}.selection small{display:block;font-size:10px;color:var(--muted)}.best{background:var(--soft);border-color:#d8e8d9}.best-top{display:flex;gap:12px;align-items:flex-start}.best-icon{border:1px solid #c2dac5;border-radius:10px;padding:8px;display:grid;place-items:center}.best p{margin:5px 0 16px;color:var(--muted);font-size:12px}.chips{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}.chip{padding:7px 11px;border:1px solid #c5ddcd;border-radius:8px;color:var(--ink);background:#ffffff90;font-size:12px;min-height:36px}.chip:hover{background:#fff}.chip.past{color:#697e6f;background:transparent}.chip.active{border-color:var(--ink);font-weight:700}.note{font-size:11px;color:var(--muted);margin:14px 0 0!important}.status{font-size:12px;color:var(--muted);margin:0 0 18px;min-height:18px}.status.error{color:#a04226;background:#fff0e8;border-radius:10px;padding:12px}.empty{min-height:245px;display:grid;place-items:center;color:var(--muted);font-size:13px;text-align:center}.empty[hidden],[hidden]{display:none!important}details{border-top:1px solid var(--line);margin-top:20px;padding-top:12px}summary{cursor:pointer;font-size:12px;color:var(--muted);padding:5px 0}table{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px;font-variant-numeric:tabular-nums}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}td:nth-child(2),th:nth-child(2){text-align:right}tr.cheap td:first-child{color:var(--green);font-weight:600}footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--muted);font-size:11px;padding:8px 2px}a{color:inherit;text-underline-offset:3px}.no-script{background:#ffe5d8;padding:14px;border-radius:10px}
+
+@media(max-width:600px){main{padding:16px 12px}header{margin-bottom:14px}.heading{margin-bottom:14px}.eyebrow{letter-spacing:1px;font-size:10px}.overview{margin-bottom:12px}.status{margin-bottom:10px}.bars{gap:2px}.bar-fill{left:0;right:0}.bar-label{font-size:8px}.bar:nth-child(even) .bar-label{visibility:hidden}.axis{width:25px}.brand{font-size:17px}.location{font-size:11px}.overview{grid-template-columns:1fr;gap:12px}.overview>.current{padding:16px 20px}.price{font-size:42px;margin:8px 0 4px}.current-note{margin-top:8px}.period{font-size:11px}.stats{grid-template-columns:repeat(3,1fr);gap:8px}.stat,.stat:first-child{display:block;grid-column:auto;padding:12px 10px}.stat-value{font-size:22px}.stat-value small{display:block;font-size:10px}.stat-label{font-size:10px;margin-bottom:5px}.stat-time{font-size:10px;margin-top:3px}.card{padding:16px 12px;border-radius:16px}.legend{gap:12px}.selection{font-size:12px}.chart-heading h2{font-size:18px}.chip{min-height:42px}footer{font-size:10px}.current-note{font-size:11px}}
+.day-switch{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-top:6px}.day-switch button{border:0;border-radius:8px;padding:9px 20px;min-height:42px;background:transparent;color:var(--muted);font-size:13px}.day-switch button[aria-pressed="true"]{background:var(--ink);color:#fff}.day-switch button:hover{box-shadow:inset 0 0 0 1px var(--line)}
+@media(prefers-reduced-motion:no-preference){.bar-fill{transition:background .15s}.refresh{transition:background .15s}}
+</style>
+</head>
+<body>
+<main>
+<header><div class="brand"><span class="mark" aria-hidden="true">ϟ</span> Electricity today</div><span class="location"><i class="dot" aria-hidden="true"></i> Helsinki, Finland</span></header>
+<div class="heading"><p class="eyebrow" id="date">Today · Helsinki time</p><div class="day-switch" role="group" aria-label="Price day"><button id="today" type="button" aria-pressed="true">Today</button><button id="tomorrow" type="button" aria-pressed="false">Tomorrow</button></div></div>
+<noscript><p class="no-script">Enable JavaScript to load today's electricity prices.</p></noscript>
+<section class="overview" aria-label="Electricity price summary">
+<div class="current"><span class="live"><i class="dot" aria-hidden="true"></i> NOW</span><p class="eyebrow">Current spot price</p><div class="price"><span id="current-price">—</span> <small>c/kWh</small></div><p class="period" id="current-period">Loading the current 15-minute price…</p><p class="current-note" id="current-note">Includes VAT · Finland price area</p></div>
+<div class="stats" role="group" aria-label="Selected day's statistics"><div class="stat"><div class="stat-label" id="average-label">Today's average</div><div class="stat-value"><span id="average">—</span> <small>c/kWh</small></div></div><div class="stat"><div class="stat-label">Cheapest hour</div><div class="stat-value"><span id="minimum">—</span> <small>c/kWh</small></div><div class="stat-time" id="minimum-time">—</div></div><div class="stat"><div class="stat-label">Most expensive</div><div class="stat-value"><span id="maximum">—</span> <small>c/kWh</small></div><div class="stat-time" id="maximum-time">—</div></div></div>
+</section>
+<p class="status" id="status" role="status" aria-live="polite">Fetching today's prices…</p>
+<section class="card" aria-labelledby="chart-title"><div class="chart-heading"><h2 id="chart-title">Hourly prices</h2><button class="refresh" id="refresh" type="button">↻ Refresh</button></div><div class="legend"><span><i class="swatch cheap" aria-hidden="true"></i>12 cheapest hours</span><span><i class="swatch" aria-hidden="true"></i>Other hours</span><span><i class="swatch now" aria-hidden="true"></i>Current hour</span></div>
+<div class="empty" id="empty">Loading today's chart…</div>
+<div id="chart-content" hidden><p class="chart-unit">c/kWh · including VAT</p><div class="chart-shell"><div class="axis" id="axis" aria-hidden="true"></div><div class="scroll" id="chart-scroll"><div class="plot"><div class="grid" id="grid" aria-hidden="true"></div><div class="bars" id="bars" role="group" aria-label="Hourly electricity prices"></div></div></div></div><div class="selection" id="selection" aria-live="polite"></div><details><summary>View all hourly prices</summary><table><thead><tr><th scope="col">Hour (Helsinki)</th><th scope="col">c/kWh incl. VAT</th><th scope="col">Status</th></tr></thead><tbody id="table"></tbody></table></details></div>
+</section>
+<section class="card best" id="best" aria-labelledby="best-title"><div class="best-top"><span class="best-icon" aria-hidden="true">↘</span><div><h2 id="best-title">12 cheapest hours</h2></div></div><div class="chips" id="chips"></div></section>
+<footer><span>Prices: <a href="https://spot-hinta.fi" target="_blank" rel="noopener noreferrer">Spot-hinta.fi</a> · <a href="https://api.spot-hinta.fi/swagger/ui" target="_blank" rel="noopener noreferrer">API</a></span><span>Spot prices include VAT. Grid fees and retailer margin are extra.</span></footer>
+</main>
+<script>
+'use strict';
+// All dates are explicitly Helsinki dates, independent of the device timezone.
+const ZONE = 'Europe/Helsinki';
+const QUARTER = 15 * 60 * 1000;
+const HOUR = 60 * 60 * 1000;
+const dateFormatter = new Intl.DateTimeFormat('en-CA', {timeZone:ZONE,year:'numeric',month:'2-digit',day:'2-digit'});
+const timeFormatter = new Intl.DateTimeFormat('en-GB', {timeZone:ZONE,hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+function dayKey(date) {
+  const parts = Object.fromEntries(dateFormatter.formatToParts(date).map(p => [p.type,p.value]));
+  return `${parts.year}-${parts.month}-${parts.day}`;
+}
+function clock(timestamp) { return timeFormatter.format(new Date(timestamp)); }
+function nextDayKey(now) {
+  // Advance the calendar date, not 24 elapsed hours (DST days vary in length).
+  const date = new Date(dayKey(now)+'T12:00:00Z');
+  date.setUTCDate(date.getUTCDate()+1);
+  return date.toISOString().slice(0,10);
+}
+function activeSlot(slots, now) { return slots.find(s => s.start <= +now && +now < s.end); }
+function buildDay(rows, now) {
+  if (!Array.isArray(rows)) throw new Error('Invalid price response.');
+  const key = dayKey(now);
+  const unique = new Map();
+  for (const row of rows) {
+    const start = Date.parse(row.DateTime);
+    if (!Number.isFinite(start) || typeof row.PriceWithTax !== 'number' || !Number.isFinite(row.PriceWithTax) || start % QUARTER !== 0) throw new Error('Invalid price data.');
+    if (dayKey(new Date(start)) === key) unique.set(start, {start,end:start+QUARTER,price:row.PriceWithTax*100});
+  }
+  const slots = [...unique.values()].sort((a,b) => a.start-b.start);
+  // Require a complete local day before ranking its cheapest hours. UTC intervals
+  // preserve both occurrences of 03:00 on the autumn clock-change day.
+  if (!slots.length || clock(slots[0].start) !== '00:00' || clock(slots.at(-1).end) !== '00:00' || dayKey(new Date(slots.at(-1).end)) === key || ![92,96,100].includes(slots.length) || slots.some((s,i) => i && s.start !== slots[i-1].end)) throw new Error('Price data for this day is incomplete. Please try again shortly.');
+  const hours = [];
+  for (let i=0; i<slots.length; i+=4) {
+    const group = slots.slice(i,i+4);
+    hours.push({start:group[0].start,end:group.at(-1).end,price:group.reduce((sum,s) => sum+s.price,0)/4});
+  }
+  const ranked = [...hours].sort((a,b) => a.price-b.price || a.start-b.start);
+  return {key,slots,hours,cheap:new Set(ranked.slice(0,12).map(h => h.start)),ranked};
+}
+function buildDays(rows, now) {
+  if (!Array.isArray(rows)) throw new Error('Invalid price response.');
+  const models = new Map(), errors = new Map();
+  const grouped = new Map([ [dayKey(now), []], [nextDayKey(now), []] ]);
+  for (const row of rows) {
+    const start = Date.parse(row?.DateTime);
+    if (!Number.isFinite(start)) throw new Error('Invalid price data.');
+    grouped.get(dayKey(new Date(start)))?.push(row);
+  }
+  for (const [key, data] of grouped) {
+    if (!data.length) continue;
+    try { models.set(key,buildDay(data,new Date(key+'T12:00:00Z'))); }
+    catch (error) { errors.set(key,error.message); }
+  }
+  return {models,errors};
+}
+// UI
+const API = 'https://api.spot-hinta.fi/TodayAndDayForward?region=FI&priceResolution=15';
+const CACHE_KEY = 'electricity-helsinki-v1';
+const $ = id => document.getElementById(id);
+const number = value => new Intl.NumberFormat('en-GB', {minimumFractionDigits:2,maximumFractionDigits:2}).format(value);
+let model = null, selected = null, fetchedAt = 0, lastAttempt = 0, busy = false, source = 'live', lastDate = '';
+let models = new Map(), errors = new Map(), dayOffset = 0, loadError = '';
+function range(hour) {
+  const repeated = model.hours.filter(h => clock(h.start) === clock(hour.start)).length > 1;
+  const offset = repeated ? ' '+new Intl.DateTimeFormat('en-GB',{timeZone:ZONE,timeZoneName:'shortOffset'}).formatToParts(new Date(hour.start)).find(p=>p.type==='timeZoneName').value : '';
+  // On DST transition, describe the start and its real one-hour duration.
+  return repeated ? clock(hour.start)+offset+' (1 hour)' : clock(hour.start)+'–'+clock(hour.end);
+}
+function selectHour(start) {
+  selected = start;
+  const hour = model.hours.find(h => h.start === start);
+  if (!hour) return;
+  $('selection').replaceChildren();
+  const description = document.createElement('span');
+  description.textContent = range(hour);
+  const label = document.createElement('small');
+  label.textContent = model.cheap.has(start) ? 'One of the 12 cheapest hours · hourly average' : 'Hourly average';
+  description.append(label);
+  const price = document.createElement('strong');
+  price.textContent = number(hour.price)+' c/kWh';
+  $('selection').append(description,price);
+  document.querySelectorAll('.bar').forEach(bar => {const chosen = +bar.dataset.start === start;bar.classList.toggle('selected',chosen);bar.setAttribute('aria-pressed',String(chosen));});
+}
+function render(now = new Date()) {
+  const key = dayOffset ? nextDayKey(now) : dayKey(now);
+  const label = dayOffset ? 'Tomorrow' : 'Today';
+  model = models.get(key) || null;
+  $('date').textContent = label+' · '+new Intl.DateTimeFormat('en-GB',{timeZone:ZONE,weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(key+'T12:00:00Z'))+' · Helsinki time';
+  $('today').setAttribute('aria-pressed',String(!dayOffset));
+  $('tomorrow').setAttribute('aria-pressed',String(!!dayOffset));
+  $('average-label').textContent = label+"'s average";
+  $('chart-title').textContent = label+"'s hourly prices";
+  $('best-title').textContent = label+"'s 12 cheapest hours";
+  $('best').hidden = !model;
+  const today = models.get(dayKey(now));
+  const current = today && activeSlot(today.slots,now);
+  const currentHour = today && activeSlot(today.hours,now);
+  $('current-price').textContent = current ? number(current.price) : '—';
+  $('current-period').textContent = current ? clock(current.start)+'–'+clock(current.end)+' · 15 min · today' : 'Current price unavailable';
+  $('current-note').textContent = currentHour ? 'This hour averages '+number(currentHour.price)+' c/kWh · VAT included' : 'Includes VAT · Finland price area';
+  savedStatus();
+  if (!model) {
+    ['average','minimum','maximum','minimum-time','maximum-time'].forEach(id => $(id).textContent='—');
+    $('chart-content').hidden = true; $('empty').hidden = false; $('chips').replaceChildren();
+    $('empty').textContent = errors.get(key) || (loadError ? 'Prices could not be loaded. Please try Refresh.' : busy ? 'Checking '+label.toLowerCase()+"'s prices…" : dayOffset ? "Tomorrow’s prices aren’t available yet. Use Refresh to check again." : 'Today’s prices are unavailable. Use Refresh to retry.');
+    return;
+  }
+  const hour = activeSlot(model.hours,now);
+  $('average').textContent = number(model.hours.reduce((sum,h) => sum+h.price,0)/model.hours.length);
+  const min = model.ranked[0], max = model.ranked.at(-1);
+  $('minimum').textContent = number(min.price); $('maximum').textContent = number(max.price);
+  $('minimum-time').textContent = range(min); $('maximum-time').textContent = range(max);
+  $('empty').hidden = true; $('chart-content').hidden = false;
+  const low = Math.min(0,...model.hours.map(h=>h.price)), high = Math.max(0,...model.hours.map(h=>h.price));
+  const span = high-low || 1, bottom = low < 0 ? low-span*.08 : 0, top = high+span*.12;
+  const y = price => (top-price)/(top-bottom)*232;
+  const zero = y(0);
+  $('axis').replaceChildren(); $('grid').replaceChildren(); $('bars').replaceChildren(); $('table').replaceChildren(); $('chips').replaceChildren();
+  const ticks = [top,(top+bottom)/2,bottom]; if (low<0) ticks.push(0);
+  ticks.forEach(value => {
+    const tick=document.createElement('span'); tick.textContent=new Intl.NumberFormat('en-GB',{maximumFractionDigits:1}).format(value); tick.style.top=y(value)+'px'; $('axis').append(tick);
+    const line=document.createElement('div'); line.className='gridline'+(value===0?' zero':''); line.style.top=y(value)+'px'; $('grid').append(line);
+  });
+  model.hours.forEach(h => {
+    const cheap=model.cheap.has(h.start), active=hour?.start===h.start;
+    const bar=document.createElement('button'); bar.type='button';bar.className='bar'+(cheap?' cheap':'')+(active?' current':'')+(h.price<0?' negative':'');bar.dataset.start=h.start;
+    bar.setAttribute('aria-label',range(h)+', '+number(h.price)+' cents per kilowatt-hour, VAT included'+(cheap?', one of the 12 cheapest hours':'')+(active?', current hour':''));
+    bar.onclick=()=>selectHour(h.start);
+    const fill=document.createElement('span');fill.className='bar-fill';fill.style.top=Math.min(y(h.price),zero)+'px';fill.style.height=Math.max(2,Math.abs(y(h.price)-zero))+'px';
+    const label=document.createElement('span');label.className='bar-label';label.textContent=clock(h.start).slice(0,2);bar.append(fill,label);
+    if(cheap){const dot=document.createElement('i');dot.className='cheap-dot';dot.setAttribute('aria-hidden','true');bar.append(dot);}
+    $('bars').append(bar);
+    const tr=document.createElement('tr');if(cheap)tr.className='cheap';
+    [range(h),number(h.price),(active?'Now · ':'')+(cheap?'Cheapest 12':'—')].forEach(text=>{const td=document.createElement('td');td.textContent=text;tr.append(td);});$('table').append(tr);
+    if(cheap){const chip=document.createElement('button');chip.type='button';chip.className='chip'+(h.end<=+now?' past':'')+(active?' active':'');chip.textContent=range(h);chip.setAttribute('aria-label',bar.getAttribute('aria-label'));chip.onclick=()=>{selectHour(h.start);};$('chips').append(chip);}
+  });
+  selectHour(model.hours.some(h=>h.start===selected)?selected:(hour || model.hours[0]).start);
+}
+function status(message,error=false){$('status').textContent=message;$('status').classList.toggle('error',error);}
+function savedStatus(){
+  if(busy){status('Fetching today’s and tomorrow’s prices…');return;}
+  if(loadError){status((model?'Showing saved prices for this day. ':'')+loadError+' Use Refresh to retry.',true);return;}
+  const error=errors.get(dayOffset?nextDayKey(new Date()):dayKey(new Date()));
+  if(error){status(error,true);return;}
+  status(fetchedAt ? (source==='cache'?'Saved prices · ':'Updated ')+clock(fetchedAt)+(source==='cache'?' · reconnect to refresh':' · prices include VAT') : 'Prices include VAT · Helsinki time');
+}
+async function load() {
+  if(busy || Date.now()-lastAttempt<61000) return;
+  busy=true;lastAttempt=Date.now();loadError='';$('refresh').disabled=true;render();
+  try{
+    const response=await fetch(API,{signal:AbortSignal.timeout(15000),credentials:'omit'});
+    if(!response.ok)throw new Error(response.status===429?'Too many requests. Wait a minute and refresh.':'The price service is temporarily unavailable.');
+    const rows=await response.json(), now=new Date();
+    const days=buildDays(rows,now);
+    if(!days.models.size)throw new Error(days.errors.values().next().value || 'Price data is unavailable.');
+    models=days.models;errors=days.errors;fetchedAt=+now;source='live';
+    try{localStorage.setItem(CACHE_KEY,JSON.stringify({rows,fetchedAt}));}catch{} // Storage may be disabled for local files.
+  }catch(error){
+    loadError=error.name==='TimeoutError'?'The request timed out.':error.message==='Failed to fetch'?'Could not connect to the price service. Check your connection.':error.message;
+  }finally{busy=false;render();setTimeout(()=>{$('refresh').disabled=false;},Math.max(0,61000-(Date.now()-lastAttempt)));}
+}
+$('refresh').onclick=load;
+$('today').onclick=()=>{dayOffset=0;selected=null;render();};
+$('tomorrow').onclick=()=>{dayOffset=1;selected=null;render();};
+try{
+  const cache=JSON.parse(localStorage.getItem(CACHE_KEY));
+  if(cache && Number.isFinite(cache.fetchedAt)){const days=buildDays(cache.rows,new Date());models=days.models;errors=days.errors;fetchedAt=cache.fetchedAt;source='cache';}
+}catch{}
+render();lastDate=dayKey(new Date());load();
+// Update the active quarter/hour locally. Fetch at most once per hour, on day
+// rollover, or on manual refresh (minimum 61 seconds between API requests).
+setInterval(()=>{
+  const now=new Date(), today=dayKey(now);render(now);
+  if(today!==lastDate || !models.has(today) || Date.now()-fetchedAt>=HOUR){lastDate=today;load();}
+},30000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){render();if(!models.has(dayKey(new Date())) || Date.now()-fetchedAt>=HOUR)load();}});
+</script>
+</body>
+</html>
